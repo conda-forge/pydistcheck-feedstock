@@ -1,5 +1,5 @@
 {% set name = "pydistcheck" %}
-{% set version = "0.1.0" %}
+{% set version = "0.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pydistcheck-{{ version }}.tar.gz
-  sha256: 806b21446c4c544ec792e6313509d14735f8f93dd26f01d1ce8e5c556d79cb4d
+  sha256: ebca6752d4742a6af73c9687718b5905688102eaff71b0a4fbc7944b3678bdf2
 
 build:
   noarch: python
