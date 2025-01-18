@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pydistcheck-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pydistcheck-{{ version }}.tar.gz
   sha256: 9666cce58a05e616d113521fa125127b817ce76d6bdcc22fcf9d9e76e1f1d537
 
 build:
@@ -14,15 +14,15 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - pydistcheck = pydistcheck.cli:check
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
     - setuptools >=67.0.0
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - click
     - tomli
 
@@ -34,6 +34,7 @@ test:
     - pydistcheck --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/jameslamb/pydistcheck
