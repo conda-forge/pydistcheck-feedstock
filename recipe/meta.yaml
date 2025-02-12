@@ -1,5 +1,5 @@
 {% set name = "pydistcheck" %}
-{% set version = "0.8.0" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,24 +7,27 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pydistcheck-{{ version }}.tar.gz
-  sha256: 9666cce58a05e616d113521fa125127b817ce76d6bdcc22fcf9d9e76e1f1d537
+  sha256: 17251cf01f5229152d36d1ba51cd2ae1366b0000270b3865f71be4ce77155688
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - pydistcheck = pydistcheck.cli:check
-  number: 1
+  number: 0
 
 requirements:
   host:
     - python {{ python_min }}
     - pip
-    - setuptools >=67.0.0
+    - setuptools >=75.0
   run:
     - python >={{ python_min }}
-    - click
-    - tomli
+    - click >=8.0
+    - tomli >=1.1.1
+    # zstandard is optional in wheels, but requiring it here
+    # because it's required to run pydistcheck on conda packages
+    - zstandard >=0.22.0
 
 test:
   imports:
