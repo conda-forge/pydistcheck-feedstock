@@ -20,11 +20,14 @@ requirements:
   host:
     - python {{ python_min }}
     - pip
-    - setuptools >=67.0.0
+    - setuptools >=75.0
   run:
     - python >={{ python_min }}
     - click >=8.0
-    - tomli
+    - tomli >=1.1.1
+    # zstandard is optional in wheels, but requiring it here
+    # because it's required to run pydistcheck on conda packages
+    - zstandard >=0.22.0
 
 test:
   imports:
