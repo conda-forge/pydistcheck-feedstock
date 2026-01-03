@@ -32,7 +32,7 @@ requirements:
     # It'll be unnecessary once the minimum Python on conda-forge is
     # at least 3.14, becase it'll use 'compression.zstd' from the standard library.
     # ref: https://github.com/jameslamb/pydistcheck/pull/335
-    - if: match(${{ python_min }}, '<3.14')
+    - if: match(python_min, '<3.14')
       then:
         - zstandard >=0.22.0
 
