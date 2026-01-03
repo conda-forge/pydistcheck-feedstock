@@ -1,0 +1,60 @@
+schema_version: 1
+
+context:
+  version: '0.11.0'
+
+package:
+  name: pydistcheck
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pydistcheck/pydistcheck-${{ version }}.tar.gz
+  sha256: b5c3d048768044ae2b29859acbafd3ab4a177c0146093e80d2c755aa5c2cab89
+
+build:
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - pydistcheck = pydistcheck.cli:check
+  number: 1
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools >=75.3.2
+  run:
+    - python >=${{ python_min }}
+    - click >=8.0
+    - tomli >=1.1.1
+    # zstandard is optional in wheels, but requiring it here
+    # because it's required to run pydistcheck on conda packages.
+    #
+    # It'll be unnecessary once the minimum Python on conda-forge is
+    # at least 3.14, becase it'll use 'compression.zstd' from the standard library.
+    # ref: https://github.com/jameslamb/pydistcheck/pull/335
+    - zstandard >=0.22.0
+
+tests:
+  - python:
+      imports:
+        - pydistcheck
+      pip_check: true
+      python_version: ${{ python_min }}.*
+  - script:
+      - pydistcheck --help
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+
+about:
+  homepage: https://github.com/jameslamb/pydistcheck
+  summary: Inspect Python package distributions and raise warnings on common problems.
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  feedstock-name: pydistcheck
+  recipe-maintainers:
+    - jameslamb
