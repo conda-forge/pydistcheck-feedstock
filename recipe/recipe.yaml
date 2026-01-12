@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: '0.11.0'
+  version: "0.11.1"
 
 package:
   name: pydistcheck
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/pydistcheck/pydistcheck-${{ version }}.tar.gz
-  sha256: b5c3d048768044ae2b29859acbafd3ab4a177c0146093e80d2c755aa5c2cab89
+  sha256: f8a7f474a67b3e2326eb00319b368603cdfab026db64c3cc538a27692bcb6f17
 
 build:
   noarch: python
