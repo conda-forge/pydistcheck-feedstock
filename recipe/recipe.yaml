@@ -28,6 +28,13 @@ requirements:
     - python >=${{ python_min }}
     - click >=8.0
     - tomli >=1.1.0
+    # zstandard is optional in wheels, but requiring it here
+    # because it's required to run pydistcheck on conda packages.
+    #
+    # It'll be unnecessary once the minimum Python on conda-forge is
+    # at least 3.14, becase it'll use 'compression.zstd' from the standard library.
+    # ref: https://github.com/jameslamb/pydistcheck/pull/335
+    - zstandard >=0.22.0
 tests:
   - python:
       imports:
