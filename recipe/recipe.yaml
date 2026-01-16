@@ -23,7 +23,7 @@ requirements:
   host:
     - python ${{ python_min }}.*
     - pip
-    - setuptools >=75.3.2
+    - hatchling >=1.28.0
   run:
     - python >=${{ python_min }}
     - click >=8.0
